@@ -20,5 +20,15 @@ public:
             }
         }
         return arr1;
+        // unordered_map<int,int> mp;
+        // for(int & num : arr2){
+        //     mp[num]++;
+        // }
+        // auto lambda = [&mp](int num1,int num2){
+        //     if(mp[num1]==mp[num2]) return num1<num2;
+        //     return mp[num1]<mp[num2];
+        // };
+        // sort(arr1.begin(),arr1.end(),lambda);
+        // return arr1;
     }
 };
