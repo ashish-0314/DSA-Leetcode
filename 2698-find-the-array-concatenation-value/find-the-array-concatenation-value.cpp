@@ -7,11 +7,11 @@ public:
         while (i < j) {
             string sa = to_string(nums[i]);
             string sb = to_string(nums[j]);
-            result += stoll(sa + sb);
+            result += stoi(sa + sb);
             i++;
             j--;
         }
-
+ 
         if (i == j)  result += nums[i];
         return result;
     }
