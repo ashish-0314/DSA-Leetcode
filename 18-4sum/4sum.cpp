@@ -16,8 +16,7 @@ public:
                     sum+=nums[k];
                     sum+=nums[l];
                     if(sum==target){
-                        vector<int> temp = {nums[i],nums[j],nums[k],nums[l]};
-                        ans.push_back(temp);
+                        ans.push_back({nums[i] , nums[j] , nums[k] , nums[l]}) ;
                         k++;
                         l--;
                         while(k<l && nums[k]==nums[k-1]) k++;
