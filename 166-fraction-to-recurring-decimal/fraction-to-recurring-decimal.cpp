@@ -14,7 +14,7 @@ public:
         if(remainder == 0) return result;
         result+=".";
 
-        unordered_map<long long,int> mp;
+        unordered_map<int,int> mp;
 
         while(remainder != 0){
             if(mp.count(remainder)){
