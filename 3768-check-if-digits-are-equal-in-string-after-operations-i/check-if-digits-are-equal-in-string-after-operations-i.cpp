@@ -3,7 +3,7 @@ public:
     bool hasSameDigits(string s) {
 
         while(s.size()>2){
-            string ans ="";
+            string ans;
             for(int i = 0  ; i< s.size()-1 ; i++){
                 ans+= ((s[i]-'0' + s[i+1]-'0') % 10) + '0';
             }
