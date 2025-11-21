@@ -10,7 +10,7 @@ public:
             generate(idx+1, curr , nums, res);
             curr.pop_back();
         }
-    
+
 
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> res;
