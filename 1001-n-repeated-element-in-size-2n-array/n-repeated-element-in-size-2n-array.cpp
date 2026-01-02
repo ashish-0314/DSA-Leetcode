@@ -4,7 +4,7 @@ public:
         int n = nums.size()/2;
         sort(nums.begin(),nums.end());
         int cnt = 1 ;
-        for(int i = 1 ; i<= n+1 ; i++ ){
+        for(int i = 1 ; i<= n ; i++ ){
             if(nums[i]==nums[i-1]) cnt++;
             if(cnt==n) return nums[i];
         }
