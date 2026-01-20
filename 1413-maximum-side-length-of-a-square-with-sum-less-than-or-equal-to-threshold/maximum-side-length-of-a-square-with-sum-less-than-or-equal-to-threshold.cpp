@@ -20,23 +20,51 @@ public:
             return sum;
         };
 
-        int best = 0 ;
-        for(int i = 0 ; i< row ; i++){
-            for(int j = 0 ; j< col ; j++){
-                for(int k= best ; k < min(row-i,col-j) ; k++){
-                    int r2 = k + i ;
-                    int c2 = k + j ;
+        // int best = 0 ;
+        // for(int i = 0 ; i< row ; i++){
+        //     for(int j = 0 ; j< col ; j++){
+        //         for(int k= best ; k < min(row-i,col-j) ; k++){
+        //             int r2 = k + i ;
+        //             int c2 = k + j ;
 
-                    int sum = sumSquare(i,j,r2,c2);
-                    if(sum<=threshold){
-                        best = max(best, k+1);
-                    }
-                    else{
-                        break;
+        //             int sum = sumSquare(i,j,r2,c2);
+        //             if(sum<=threshold){
+        //                 best = max(best, k+1);
+        //             }
+        //             else{
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
+        // return best;
+
+        auto check = [&](int side){
+            for(int i = 0 ; i + side - 1 < row ; i++){
+                for(int j = 0 ; j + side -1 < col ; j++){
+                    int r2 = i + side -1 ;
+                    int c2 = j + side -1;
+                    if(sumSquare(i,j,r2,c2)<=threshold){
+                        return true;
                     }
                 }
             }
+            return false;
+        };
+
+        int low = 1 ;
+        int high = min(row,col);
+        int result = 0 ;
+        while(low<=high){
+            int mid = low + (high - low )/2;
+            if(check(mid)){
+                result = mid ;
+                low = mid + 1 ;
+            }
+            else{
+                high = mid -1;
+            }
         }
-        return best;
+        return result;
     }
 };
