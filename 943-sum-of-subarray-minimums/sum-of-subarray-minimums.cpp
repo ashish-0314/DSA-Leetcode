@@ -4,22 +4,17 @@ public:
         int n = arr.size();
         const int MOD = 1e9 + 7 ;
         stack<int> st ;
-        vector<int> left(n) , right(n) ;
-        for(int i = 0 ; i < arr.size() ; i++){
-            while(!st.empty() && arr[st.top()]>=arr[i]) st.pop();
-            left[i] = st.empty() ? i+1 : i-st.top();
+        long long sum = 0 ;
+        for(int i = 0 ; i <= n ; i++){
+            while(!st.empty() && (i==n || arr[st.top()]>=arr[i])){
+                int idx = st.top();
+                st.pop();
+                int left = (st.empty()) ? idx+1 : idx-st.top();
+                int right = i-idx ;
+                sum = (sum + 1LL * arr[idx] * left %MOD * right)%MOD;
+            }
             st.push(i);
         }
-        while(!st.empty()) st.pop();
-        for(int i = n-1 ; i >= 0 ; i--){
-            while(!st.empty() && arr[st.top()]>arr[i]) st.pop();
-            right[i] = st.empty() ? n-i : st.top()-i;
-            st.push(i);
-        }
-        long long ans = 0 ;
-        for(int i =0 ; i < n ; i++){
-            ans = (ans + 1LL * arr[i]*left[i]*right[i])%MOD;
-        }
-        return ans ;
+        return sum;
     }
 };
