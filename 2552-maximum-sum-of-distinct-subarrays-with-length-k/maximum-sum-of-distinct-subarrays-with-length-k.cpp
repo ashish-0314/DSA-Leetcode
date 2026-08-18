@@ -5,17 +5,18 @@ public:
         int l = 0;
         long long sum = 0 , maxi = 0 ;
         for(int r = 0 ; r < nums.size() ; r++){
+            mp[nums[r]]++;
             sum+=nums[r];
-            if (mp.count(nums[r]) && mp[nums[r]] >= l) {
-                int newL = mp[nums[r]] + 1;
-                while (l < newL) {
-                    sum -= nums[l];
-                    l++;
-                }
+
+            while(mp[nums[r]]>1){
+                mp[nums[l]]--;
+                sum-=nums[l];
+                l++;
             }
-            mp[nums[r]] = r;
+
             if(r-l+1==k){
                 maxi = max(maxi,sum);
+                mp[nums[l]]--;
                 sum-=nums[l];
                 l++;
             }
