@@ -10,33 +10,21 @@
  */
 class Solution {
 public:
-    ListNode* merge(ListNode* list1 , ListNode* list2){
-        ListNode* dummyNode = new ListNode(-1);
-        ListNode* res = dummyNode ;
-        while(list1 != NULL && list2 != NULL){
-            if(list1->val < list2->val){
-                res->next = list1;
-                list1 = list1->next;
-            }
-            else{
-                res->next = list2;
-                list2 = list2->next;
-            }
-            res= res->next;
-        }
-        if(list1) res->next = list1;
-        else res->next = list2;
-        return dummyNode->next;
-    }
+    typedef pair<int,ListNode*> P;
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.empty()) return NULL;
-        int n = lists.size();
-        while(n>1){
-            for(int i = 0 ; i < n/2 ; i++){
-                lists[i] = merge(lists[i],lists[n-i-1]);
-            }
-            n=(n+1)/2;
+        priority_queue<P,vector<P> , greater<P>> pq;
+        for(int i = 0 ; i < lists.size() ; i++){
+            if(lists[i]) pq.push({lists[i]->val,lists[i]});
         }
-        return lists[0];
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* temp = dummyNode;
+        while(!pq.empty()){
+            auto it = pq.top();
+            pq.pop();
+            if(it.second->next) pq.push({it.second->next->val , it.second->next});
+            temp->next = it.second;
+            temp = temp->next;
+        }
+        return dummyNode->next;
     }
 };
